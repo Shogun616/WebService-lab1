@@ -41,17 +41,6 @@
         </resources>
     </build>
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.JavaEnthusiast</groupId>-->
-<!--            <artifactId>spi</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--        </dependency>-->
-        <!--        <dependency>
-                   <groupId>org.JavaEnthusiast</groupId>
-                   <artifactId>Plugin</artifactId>
-                   <version>1.0-SNAPSHOT</version>
-                   <scope>runtime</scope>
-               </dependency-->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -62,6 +51,17 @@
                    <artifactId>FileUtils</artifactId>
                    <version>1.0.0-SNAPSHOT</version>
                </dependency>
+                <dependency>
+                    <groupId>org.JavaEnthusiast</groupId>
+                    <artifactId>spi</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+                        <dependency>
+                           <groupId>org.JavaEnthusiast</groupId>
+                           <artifactId>Plugin</artifactId>
+                           <version>1.0.0-SNAPSHOT</version>
+                           <scope>runtime</scope>
+                       </dependency>
                <dependency>
                    <groupId>com.google.code.gson</groupId>
                    <artifactId>gson</artifactId>

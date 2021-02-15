@@ -33,13 +33,12 @@ public class ServerExample {
     private static void handleConnection(Socket socket) {
 
         DataCall dataCall = new DataCall();
-
         System.out.println(Thread.currentThread());
 
         try {
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String url = readHeaders(input);
+            String url = readHeaders(input).requestedUrl;
 
             var output = new PrintWriter(socket.getOutputStream());
 
@@ -71,63 +70,79 @@ public class ServerExample {
 
                     dataCall.addContacts(0, firstName, lastName);
             }
-            else if(url.equals("/index.html") || url.equals("/cat.png") || url.equals("/Laboration1.pdf")){
+            else{
 
                 File file = new File("web" + File.separator + url);
                 byte[] page = FileReader.readFromFile(file);
 
-                String contentType = Files.probeContentType(file.toPath());
-
-                output.println("HTTP/1.1 200 OK");
-                output.println("Content-Length:" + page.length);
-                output.println("Content-Type:" + contentType);
-                //output.println("Content-type::" + "contacts.json");
-                output.println("");
-                output.flush();
-
-                var dataOut = new BufferedOutputStream(socket.getOutputStream());
-                dataOut.write(page);
-                dataOut.flush();
+                if(page.length == 0) {
+                    sendErrorPage(socket);
+                }
+                else {
+                    sendResponse(socket, output, file, page);
+                }
             }
-            else{
-                var output2 = new PrintWriter(socket.getOutputStream());
-            String page = """
-                    <html>
-                    <head>
-                        <title>404-Not Found</title>
-                    </head>
-                    <body>
-                    <h1>File Not Found</h1>
-                    <div>Possible cause: Invalid url</div>
-                    </body>
-                    </html>""";
-                output2.println("HTTP/1.1 404 Error");
-                output2.println("Content-Length:" + page.getBytes().length);
-                output2.println("Error");
-                output2.println("");
-                output2.print(page);
-
-                output2.flush();
-                socket.close();
-            }
+            socket.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static String readHeaders(BufferedReader input) throws IOException {
-        String requestedUrl = "";
+    private static void sendResponse(Socket socket, PrintWriter output, File file, byte[] page) throws IOException {
+        String contentType = Files.probeContentType(file.toPath());
+        Request request = new Request();
+        output.println("HTTP/1.1 200 OK");
+        output.println("Content-Length:" + page.length);
+        output.println("Content-Type:" + contentType);
+        output.println("");
+        output.flush();
+
+        var dataOut = new BufferedOutputStream(socket.getOutputStream());
+//        if(request.requestedType.equals("GET")){
+//            dataOut.write(page);
+//        }
+        dataOut.write(page);
+        dataOut.flush();
+    }
+
+    private static void sendErrorPage(Socket socket) throws IOException {
+        var output2 = new PrintWriter(socket.getOutputStream());
+        String errorPage = """
+        <html>
+        <head>
+            <title>404-Not Found</title>
+        </head>
+        <body>
+        <h1>File Not Found</h1>
+        <div>Possible cause: Invalid url</div>
+        </body>
+        </html>""";
+        output2.println("HTTP/1.1 404 Error");
+        output2.println("Content-Length:" + errorPage.getBytes().length);
+        output2.println("Error");
+        output2.println("");
+        output2.print(errorPage);
+
+        output2.flush();
+    }
+
+    private static Request readHeaders(BufferedReader input) throws IOException {
+        Request request = new Request();
         while (true) {
             String headerLine = input.readLine();
-            if (headerLine.startsWith("GET") || headerLine.startsWith("POST") || headerLine.startsWith("HEAD")){
-                requestedUrl = headerLine.split(" ")[1];
+            if (headerLine.startsWith("HEAD")){
+                request.requestedType = headerLine.split(" ")[0];
             }
+            else if(headerLine.startsWith("GET") || headerLine.startsWith("POST")){
+                request.requestedUrl = headerLine.split(" ")[1];
+            }
+
             System.out.println(headerLine);
             if (headerLine.isEmpty())
                 break;
         }
-        return requestedUrl;
+        return request;
     }
 
     private static String createJsonResponse() {

@@ -31,3 +31,18 @@ Content-Type: application/json
   "FirstName": "Bim",
   "LastName": "Ils"
 }
+
+###
+
+HEAD http://localhost:5050/Laboration1.pdf
+Host: localhost
+
+###
+
+HEAD http://localhost:5050/cat.png
+Host: localhost
+
+###
+
+HEAD http://localhost:5050/index.html
+Host: localhost
