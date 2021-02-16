@@ -9,14 +9,7 @@ import java.util.List;
 public class DataCall {
    private static EntityManagerFactory entityManagerFactory= Persistence
             .createEntityManagerFactory("Lab1WebServices");
-
-    public static void main(String[] args) {
-        DataCall dataCall = new DataCall();
-        dataCall.addContacts(4,"Biniam","Haile");
-        System.out.println(dataCall.getAll());
-        entityManagerFactory.close();
-    }
-
+   
     public void addContacts(int id,String firstName,String lastName ){
         EntityManager entityManager=entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction=null;

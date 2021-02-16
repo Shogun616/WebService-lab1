@@ -12,6 +12,8 @@ import org.json.JSONObject;
 
 public class ServerExample {
 
+    static Request request = new Request();
+
     public static void main(String[] args) {
 
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -38,7 +40,7 @@ public class ServerExample {
         try {
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String url = readHeaders(input).requestedUrl;
+            String url = readHeaders(input);
 
             var output = new PrintWriter(socket.getOutputStream());
 
@@ -91,7 +93,6 @@ public class ServerExample {
 
     private static void sendResponse(Socket socket, PrintWriter output, File file, byte[] page) throws IOException {
         String contentType = Files.probeContentType(file.toPath());
-        Request request = new Request();
         output.println("HTTP/1.1 200 OK");
         output.println("Content-Length:" + page.length);
         output.println("Content-Type:" + contentType);
@@ -99,10 +100,9 @@ public class ServerExample {
         output.flush();
 
         var dataOut = new BufferedOutputStream(socket.getOutputStream());
-//        if(request.requestedType.equals("GET")){
-//            dataOut.write(page);
-//        }
-        dataOut.write(page);
+        if(!request.requestedType.equals("HEAD")){
+            dataOut.write(page);
+        }
         dataOut.flush();
     }
 
@@ -127,22 +127,20 @@ public class ServerExample {
         output2.flush();
     }
 
-    private static Request readHeaders(BufferedReader input) throws IOException {
-        Request request = new Request();
+    private static String readHeaders(BufferedReader input) throws IOException {
+
         while (true) {
             String headerLine = input.readLine();
-            if (headerLine.startsWith("HEAD")){
+
+            if(headerLine.startsWith("GET") || headerLine.startsWith("POST") || headerLine.startsWith("HEAD")){
                 request.requestedType = headerLine.split(" ")[0];
-            }
-            else if(headerLine.startsWith("GET") || headerLine.startsWith("POST")){
                 request.requestedUrl = headerLine.split(" ")[1];
             }
-
             System.out.println(headerLine);
             if (headerLine.isEmpty())
                 break;
         }
-        return request;
+        return request.requestedUrl;
     }
 
     private static String createJsonResponse() {
