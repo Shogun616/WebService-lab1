@@ -74,11 +74,11 @@ public class ServerExample {
 
                     dataCall.addContacts(0, firstName, lastName);
 
-                output.println("HTTP/1.1 201 Created");
-                output.println("Content-Length:" + jsonResponse.getBytes().length);
-                output.println("Content-Type:" + "application/json");
-                output.println("");
-                output.flush();
+                    output.println("HTTP/1.1 201 CREATED");
+                    output.println("Content-Length:" + jsonResponse.getBytes().length);
+                    output.println("Content-Type:" + "application/json");
+                    output.println("");
+                    output.flush();
             }
             else{
 
