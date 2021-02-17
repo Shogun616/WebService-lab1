@@ -50,13 +50,15 @@ public class ServerExample {
 
                 output.println("HTTP/1.1 200 OK");
                 output.println("Content-Length:" + jsonResponse.getBytes().length);
-                output.println("Content-Type:" + "application/json");  //application/json
+                output.println("Content-Type:" + "application/json");
                 output.println("");
 
                 output.println(jsonResponse);
                 output.flush();
             }
             else if(url.equals("/upload")){
+
+                var jsonResponse = createJsonResponse();
 
                 System.out.println(input);
 
@@ -71,6 +73,12 @@ public class ServerExample {
                     String lastName = jsonObject.getString("LastName");
 
                     dataCall.addContacts(0, firstName, lastName);
+
+                output.println("HTTP/1.1 201 Created");
+                output.println("Content-Length:" + jsonResponse.getBytes().length);
+                output.println("Content-Type:" + "application/json");
+                output.println("");
+                output.flush();
             }
             else{
 
@@ -118,7 +126,7 @@ public class ServerExample {
         <div>Possible cause: Invalid url</div>
         </body>
         </html>""";
-        output2.println("HTTP/1.1 404 Error");
+        output2.println("HTTP/1.1 404 Not Found");
         output2.println("Content-Length:" + errorPage.getBytes().length);
         output2.println("Error");
         output2.println("");

@@ -3,18 +3,18 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for Lab1-WebService" enabled="true">
+      <profile name="Annotation profile for spi" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar" />
         </processorPath>
-        <module name="plugin" />
         <module name="fileutils" />
+        <module name="plugin" />
         <module name="Server" />
-        <module name="FileUtils" />
         <module name="spi" />
+        <module name="FileUtils" />
         <module name="Plugin" />
       </profile>
     </annotationProcessing>

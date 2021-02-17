@@ -262,7 +262,7 @@
 1317579732|||0|execute|G
 1317579732|||2|execute|D
 </Grants>
-      <IntrospectionTimestamp>2021-02-13.21:06:21.700</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2021-02-17.16:04:02.767</IntrospectionTimestamp>
       <Current>1</Current>
       <DescriptionsCheckSum>10059936681</DescriptionsCheckSum>
     </schema>
@@ -375,10 +375,9 @@
       <ModifiedTimestamp>2019-10-15.01:00:54.123</ModifiedTimestamp>
     </table>
     <table id="67" parent="45" name="Contacts">
-      <ObjectId>430624577</ObjectId>
-      <Outdated>1</Outdated>
-      <CreatedTimestamp>2021-02-08.21:05:35.760</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-08.21:05:35.777</ModifiedTimestamp>
+      <ObjectId>750625717</ObjectId>
+      <CreatedTimestamp>2021-02-14.20:05:33.333</CreatedTimestamp>
+      <ModifiedTimestamp>2021-02-14.20:05:33.483</ModifiedTimestamp>
     </table>
     <table id="68" parent="45" name="Countries">
       <ObjectId>1429580131</ObjectId>
@@ -629,6 +628,7 @@ int</ExtendedProperties>
     </key>
     <column id="110" parent="67" name="ID">
       <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -647,9 +647,9 @@ int</ExtendedProperties>
       <Unique>1</Unique>
     </index>
     <key id="114" parent="67" name="PK_Contacts">
-      <ObjectId>446624634</ObjectId>
-      <CreatedTimestamp>2021-02-08.21:05:35.770</CreatedTimestamp>
-      <ModifiedTimestamp>2021-02-08.21:05:35.770</ModifiedTimestamp>
+      <ObjectId>766625774</ObjectId>
+      <CreatedTimestamp>2021-02-14.20:05:33.480</CreatedTimestamp>
+      <ModifiedTimestamp>2021-02-14.20:05:33.480</ModifiedTimestamp>
       <ColNames>ID</ColNames>
       <UnderlyingIndexName>PK_Contacts</UnderlyingIndexName>
       <Primary>1</Primary>

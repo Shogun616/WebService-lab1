@@ -28,10 +28,9 @@ Host: localhost
 Content-Type: application/json
 
 {
-  "FirstName": "Bim",
-  "LastName": "Ils"
+  "FirstName": "Joakim",
+  "LastName": "Von Anka"
 }
-
 ###
 
 HEAD http://localhost:5050/Laboration1.pdf

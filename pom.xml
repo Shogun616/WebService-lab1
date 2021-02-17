@@ -19,10 +19,10 @@
     <name>Lab1-WebService</name>
     <packaging>pom</packaging>
     <modules>
-        <module>spi</module>
+<!--        <module>spi</module>-->
         <module>Server</module>
         <module>FileUtils</module>
-        <module>Plugin</module>
+<!--        <module>Plugin</module>-->
     </modules>
     <dependencies>
         <dependency>
