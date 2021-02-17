@@ -1,6 +1,6 @@
-package org.JavaEnthusiast;
+package org.server;
 
-import org.JavaEnthusiast.FileUtils.FileReader;
+import org.fileutils.FileReader;
 
 import java.io.*;
 import java.net.ServerSocket;

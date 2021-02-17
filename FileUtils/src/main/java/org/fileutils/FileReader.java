@@ -1,4 +1,4 @@
-package org.JavaEnthusiast.FileUtils;
+package org.fileutils;
 
 import java.io.File;
 import java.io.FileInputStream;

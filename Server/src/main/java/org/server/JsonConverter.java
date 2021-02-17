@@ -1,4 +1,4 @@
-package org.JavaEnthusiast;
+package org.server;
 
 import com.google.gson.Gson;
 

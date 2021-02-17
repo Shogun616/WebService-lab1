@@ -1,3 +1,5 @@
+import org.fileutils.FileReader;
+
 module Server{
     requires org.JavaEnthusiast.FileUtils;
     requires java.sql;
@@ -8,6 +10,6 @@ module Server{
     requires java.xml.bind;
     requires com.google.gson;
     requires org.json;
-    opens org.JavaEnthusiast to org.hibernate.orm.core, com.google.gson;
-    uses org.JavaEnthusiast.FileUtils.FileReader;
+    opens org.server to org.hibernate.orm.core, com.google.gson;
+    uses FileReader;
 }
